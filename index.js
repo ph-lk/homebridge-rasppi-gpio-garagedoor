@@ -46,7 +46,10 @@ function RaspPiGPIOGarageDoorAccessory(log, config) {
   log("Door Switch Val: " + (this.relayOn == 1 ? "ACTIVE_HIGH" : "ACTIVE_LOW"));
   log("Door Switch Active Time in ms: " + this.doorSwitchPressTimeInMs);
 
+  // added open & closed pin initialization
+
   if (this.hasClosedSensor()) {
+      rpio.open(this.closedDoorSensorPin, rpio.INPUT);
       log("Door Closed Sensor: Configured");
       log("    Door Closed Sensor Pin: " + this.closedDoorSensorPin);
       log("    Door Closed Sensor Val: " + (this.closedDoorSensorValue == 1 ? "ACTIVE_HIGH" : "ACTIVE_LOW"));
@@ -55,6 +58,7 @@ function RaspPiGPIOGarageDoorAccessory(log, config) {
   }
 
   if(this.hasOpenSensor()) {
+      rpio.open(this.openDoorSensorPin, rpio.INPUT);
       log("Door Open Sensor: Configured");
       log("    Door Open Sensor Pin: " + this.openDoorSensorPin);
       log("    Door Open Sensor Val: " + (this.openDoorSensorValue == 1 ? "ACTIVE_HIGH" : "ACTIVE_LOW"));
